@@ -8,6 +8,7 @@ import { useState } from "react";
 type ThemeType = "light" | "dark";
 
 export type Task = {
+  id: string;
   title: string;
   isDone: boolean;
 };
@@ -23,6 +24,24 @@ export default function Home() {
 
   const handleNewTask = (newTask: Task) => {
     const updatedTasks = [...tasks, newTask];
+
+    setTasks(updatedTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
+
+  const handleIsDoneTask = (id: string) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, isDone: !task.isDone } : task
+    );
+
+    setTasks(updatedTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  };
+
+  const handleDeleteTask = (id: string) => {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
 
     setTasks(updatedTasks);
 
@@ -63,7 +82,15 @@ export default function Home() {
         <section className="flex flex-col gap-2">
           <p>Your tasks</p>
           {tasks.map((data) => {
-            return <Task title={data.title} isDone={data.isDone} />;
+            return (
+              <Task
+                title={data.title}
+                isDone={data.isDone}
+                id={data.id}
+                handleIsDoneTask={handleIsDoneTask}
+                handleDeleteTask={handleDeleteTask}
+              />
+            );
           })}
         </section>
       </div>

@@ -1,4 +1,3 @@
-"use client";
 import "./globals.css";
 import { Work_Sans } from "next/font/google";
 import { ThemeProvider, useTheme } from "@/context/Theme/ThemeContext";

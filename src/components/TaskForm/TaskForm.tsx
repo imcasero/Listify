@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Task } from "@/app/page";
 import { useTheme } from "@/context/Theme/ThemeContext";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { randomUUID } from "crypto";
 
 interface TaskFormProps {
   addTask: (newTask: Task) => void;
@@ -18,6 +19,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ addTask }) => {
     if (!taskInput.trim()) return;
 
     const newTask: Task = {
+      id: crypto.randomUUID(),
       title: taskInput.trim(),
       isDone: false,
     };
@@ -32,8 +34,8 @@ export const TaskForm: React.FC<TaskFormProps> = ({ addTask }) => {
         type="text"
         name="task"
         id="task-input"
-        value={taskInput} // Vincula el input al state
-        onChange={(e) => setTaskInput(e.target.value)} // Actualiza el valor del input
+        value={taskInput}
+        onChange={(e) => setTaskInput(e.target.value)}
         maxLength={254}
         className={`w-3/4 h-10 bg-${theme}-background rounded-lg p-2 focus:outline-none border border-${theme}-text`}
         placeholder="Create a new task"
