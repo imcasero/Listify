@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <main className={`min-h-screen ${themeClasses[theme]}`}>
-      <div className="flex flex-col gap-5 min-h-screen w-[768px] m-auto py-5 font-[family-name:var(--font-geist-sans)]">
+      <div className="flex flex-col gap-5 min-h-screen w-full px-4 py-5 m-auto font-[family-name:var(--font-geist-sans)] md:w-[767px]">
         <header className="flex justify-between align-middle">
           <h1 className="font-bold text-lg">Listify</h1>
           <div className="flex gap-4">
