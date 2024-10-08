@@ -12,7 +12,7 @@ export default function Home() {
   };
 
   return (
-    <div className={`min-h-screen ${themeClasses[theme]}`}>
+    <main className={`min-h-screen ${themeClasses[theme]}`}>
       <div className="min-h-screen w-[768px] m-auto py-5 font-[family-name:var(--font-geist-sans)]">
         <header className="flex justify-between align-middle">
           <h1 className="font-bold text-lg">Listify</h1>
@@ -34,6 +34,6 @@ export default function Home() {
           complete, and manage your to-dos effortlessly
         </p>
       </div>
-    </div>
+    </main>
   );
 }
