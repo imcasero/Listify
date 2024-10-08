@@ -12,8 +12,9 @@ export type Task = {
   isDone: boolean;
 };
 
-const getLocalStorageTask = () => {
-  return [];
+const getLocalStorageTask = (): Task[] => {
+  const savedTasks = localStorage.getItem("tasks");
+  return savedTasks ? JSON.parse(savedTasks) : [];
 };
 
 export default function Home() {
@@ -24,6 +25,8 @@ export default function Home() {
     const updatedTasks = [...tasks, newTask];
 
     setTasks(updatedTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
   const themeClasses: Record<ThemeType, string> = {
@@ -56,10 +59,12 @@ export default function Home() {
           Stay on top of your tasks with simple scheduling and tracking. Create,
           complete, and manage your to-dos effortlessly
         </p>
-        <TaskForm />
+        <TaskForm addTask={handleNewTask} />
         <section className="flex flex-col gap-2">
           <p>Your tasks</p>
-          <Task title="ejemplo 1" isDone />
+          {tasks.map((data) => {
+            return <Task title={data.title} isDone={data.isDone} />;
+          })}
         </section>
       </div>
     </main>
