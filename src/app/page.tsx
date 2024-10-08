@@ -1,12 +1,31 @@
 "use client";
+import { Task } from "@/components/Task/Task";
 import { TaskForm } from "@/components/TaskForm/TaskForm";
 import { useTheme } from "@/context/Theme/ThemeContext";
 import { GitHubLogoIcon, SunIcon, MoonIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 type ThemeType = "light" | "dark";
 
+export type Task = {
+  title: string;
+  isDone: boolean;
+};
+
+const getLocalStorageTask = () => {
+  return [];
+};
+
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
+  const [tasks, setTasks] = useState<Task[]>(getLocalStorageTask());
+
+  const handleNewTask = (newTask: Task) => {
+    const updatedTasks = [...tasks, newTask];
+
+    setTasks(updatedTasks);
+  };
+
   const themeClasses: Record<ThemeType, string> = {
     light: "bg-light-background text-light-text",
     dark: "bg-dark-background text-dark-text",
@@ -38,6 +57,10 @@ export default function Home() {
           complete, and manage your to-dos effortlessly
         </p>
         <TaskForm />
+        <section className="flex flex-col gap-2">
+          <p>Your tasks</p>
+          <Task title="ejemplo 1" isDone />
+        </section>
       </div>
     </main>
   );

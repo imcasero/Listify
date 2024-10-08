@@ -1,6 +1,10 @@
 import { useTheme } from "@/context/Theme/ThemeContext";
 import { PlusIcon } from "@radix-ui/react-icons";
 
+interface TaskFormProps {
+  addTask: () => void;
+}
+
 export const TaskForm: React.FC = () => {
   const { theme } = useTheme();
 
@@ -16,7 +20,7 @@ export const TaskForm: React.FC = () => {
       />
       <button
         type="submit"
-        className={`w-1/4 h-10 bg-${theme}-background rounded-lg p-2 border border-${theme}-text hover:bg-${theme}-secondaryBackground flex justify-center items-center`}
+        className={`w-1/4 h-10 bg-${theme}-background placeholder-${theme}-text  rounded-lg p-2 border border-${theme}-text hover:bg-${theme}-secondaryBackground flex justify-center items-center`}
       >
         <PlusIcon className={`fill-current text-${theme}-text`} />
       </button>
