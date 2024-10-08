@@ -51,13 +51,21 @@ export default function Home() {
     dark: "bg-dark-background text-dark-text",
   };
 
+  const completedTasks = tasks.filter((task) => task.isDone).length;
+  const totalTasks = tasks.length;
+
   return (
     <main className={`min-h-screen ${themeClasses[theme]}`}>
       <div className="flex flex-col gap-5 min-h-screen w-[768px] m-auto py-5 font-[family-name:var(--font-geist-sans)]">
         <header className="flex justify-between align-middle">
           <h1 className="font-bold text-lg">Listify</h1>
           <div className="flex gap-4">
-            <button className={`hover: bg-${theme}-secondaryBackground`}>
+            <button
+              className={`hover: bg-${theme}-secondaryBackground`}
+              onClick={() =>
+                window.open("https://github.com/imcasero/Listify", "_blank")
+              }
+            >
               <GitHubLogoIcon width={20} height={20} />
             </button>
             <button
@@ -78,7 +86,14 @@ export default function Home() {
         </p>
         <TaskForm addTask={handleNewTask} />
         <section className="flex flex-col gap-2">
-          <p>Your tasks</p>
+          <p className="mb-2">
+            Your tasks{" "}
+            <span
+              className={`rounded-lg border border-${theme}-text py-1 px-2 w-8`}
+            >
+              {completedTasks}/{totalTasks}
+            </span>
+          </p>
           {tasks.map((data) => (
             <Task
               key={data.id}
