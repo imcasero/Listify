@@ -1,8 +1,8 @@
 import "./globals.css";
 import { Work_Sans } from "next/font/google";
-import { ThemeProvider, useTheme } from "@/context/Theme/ThemeContext";
+import { ThemeProvider } from "@/context/Theme/ThemeContext";
 
-export const work_sans = Work_Sans({
+const work_sans = Work_Sans({
   subsets: ["latin"],
   display: "swap",
 });

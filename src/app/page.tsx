@@ -3,7 +3,7 @@ import { Task } from "@/components/Task/Task";
 import { TaskForm } from "@/components/TaskForm/TaskForm";
 import { useTheme } from "@/context/Theme/ThemeContext";
 import { GitHubLogoIcon, SunIcon, MoonIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ThemeType = "light" | "dark";
 
@@ -13,20 +13,20 @@ export type Task = {
   isDone: boolean;
 };
 
-const getLocalStorageTask = (): Task[] => {
-  const savedTasks = localStorage.getItem("tasks");
-  return savedTasks ? JSON.parse(savedTasks) : [];
-};
-
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
-  const [tasks, setTasks] = useState<Task[]>(getLocalStorageTask());
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    const initialTasks = savedTasks ? JSON.parse(savedTasks) : [];
+    setTasks(initialTasks);
+  }, []);
 
   const handleNewTask = (newTask: Task) => {
     const updatedTasks = [...tasks, newTask];
 
     setTasks(updatedTasks);
-
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
@@ -36,7 +36,6 @@ export default function Home() {
     );
 
     setTasks(updatedTasks);
-
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
@@ -44,7 +43,6 @@ export default function Home() {
     const updatedTasks = tasks.filter((task) => task.id !== id);
 
     setTasks(updatedTasks);
-
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
@@ -81,17 +79,16 @@ export default function Home() {
         <TaskForm addTask={handleNewTask} />
         <section className="flex flex-col gap-2">
           <p>Your tasks</p>
-          {tasks.map((data) => {
-            return (
-              <Task
-                title={data.title}
-                isDone={data.isDone}
-                id={data.id}
-                handleIsDoneTask={handleIsDoneTask}
-                handleDeleteTask={handleDeleteTask}
-              />
-            );
-          })}
+          {tasks.map((data) => (
+            <Task
+              key={data.id}
+              title={data.title}
+              isDone={data.isDone}
+              id={data.id}
+              handleIsDoneTask={handleIsDoneTask}
+              handleDeleteTask={handleDeleteTask}
+            />
+          ))}
         </section>
       </div>
     </main>
