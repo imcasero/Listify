@@ -29,6 +29,10 @@ export default function Home() {
             </button>
           </div>
         </header>
+        <p className="w-full mt-5">
+          Stay on top of your tasks with simple scheduling and tracking. Create,
+          complete, and manage your to-dos effortlessly
+        </p>
       </div>
     </div>
   );
