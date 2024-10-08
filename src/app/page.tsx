@@ -1,4 +1,5 @@
 "use client";
+import { TaskForm } from "@/components/TaskForm/TaskForm";
 import { useTheme } from "@/context/Theme/ThemeContext";
 import { GitHubLogoIcon, SunIcon, MoonIcon } from "@radix-ui/react-icons";
 
@@ -13,14 +14,17 @@ export default function Home() {
 
   return (
     <main className={`min-h-screen ${themeClasses[theme]}`}>
-      <div className="min-h-screen w-[768px] m-auto py-5 font-[family-name:var(--font-geist-sans)]">
+      <div className="flex flex-col gap-5 min-h-screen w-[768px] m-auto py-5 font-[family-name:var(--font-geist-sans)]">
         <header className="flex justify-between align-middle">
           <h1 className="font-bold text-lg">Listify</h1>
           <div className="flex gap-4">
-            <button className="hover: ">
+            <button className={`hover: bg-${theme}-secondaryBackground`}>
               <GitHubLogoIcon width={20} height={20} />
             </button>
-            <button onClick={toggleTheme}>
+            <button
+              onClick={toggleTheme}
+              className={`hover: bg-${theme}-secondaryBackground`}
+            >
               {theme === "light" ? (
                 <MoonIcon width={20} height={20} />
               ) : (
@@ -29,10 +33,11 @@ export default function Home() {
             </button>
           </div>
         </header>
-        <p className="w-full mt-5">
+        <p className="w-full">
           Stay on top of your tasks with simple scheduling and tracking. Create,
           complete, and manage your to-dos effortlessly
         </p>
+        <TaskForm />
       </div>
     </main>
   );
