@@ -15,7 +15,7 @@ const config: Config = {
           text: "#2E2E2E",
         },
         dark: {
-          background: "#181818",
+          background: "#0b0b0b",
           secondaryBackground: "#1E1E1E",
           text: "#E3E3E3",
         },
